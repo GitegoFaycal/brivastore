@@ -5,10 +5,10 @@
   "description": "Briva Store Rwanda - fashion e-commerce storefront + admin dashboard (Node/Express API + React/Tailwind client)",
   "scripts": {
     "dev": "concurrently -n api,web -c blue,magenta \"npm run dev:api\" \"npm run dev:web\"",
-    "dev:api": "node --watch server/index.js",
+    "dev:api": "node --watch --env-file-if-exists=.env server/index.js",
     "dev:web": "npm --prefix client run dev",
     "build": "npm --prefix client install && npm --prefix client run build",
-    "start": "node server/index.js",
+    "start": "node --env-file-if-exists=.env server/index.js",
     "postinstall": "echo postinstall-ok"
   },
   "engines": { "node": ">=18" },

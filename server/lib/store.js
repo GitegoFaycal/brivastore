@@ -1,7 +1,7 @@
 /**
  * Tiny document store.
  *  - In memory by default (seeded with demo data).
- *  - Optional persistence to Upstash Redis (REST) when UPSTASH_REDIS_REST_URL/TOKEN are set,
+ *  - Optional persistence to Upstash Redis (REST) when UPSTASH_REDIS_REST_URL/TOKEN (or Vercel KV_REST_API_URL/TOKEN) are set,
  *    so admin changes survive serverless cold starts on Vercel.
  */
 const seed = require('../data/seed');
@@ -11,8 +11,8 @@ const COLLECTIONS = [
   'users', 'promos', 'subscribers', 'settings', 'content',
 ];
 
-const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 const persistent = Boolean(REDIS_URL && REDIS_TOKEN);
 
 let data = null;
